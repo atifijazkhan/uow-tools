@@ -3,7 +3,7 @@
 #==========================
 #INIT
 #==========================
-source ~/workspace/software/bin/env.build
+source ~/workspace/software/bin/build-tools/env.build
 build_init
 
 
@@ -82,7 +82,7 @@ ln -s -r $MY_LOCAL/cargo/bin/* $MY_LOCAL/bin/
 
 
 #================================================================================================
-# The order of install is important.
+# Common Requiremnts for R and Octave
 #================================================================================================
 export MAKE_PARAMS=-j32 
 std_make readline-7.0.tar.gz
@@ -113,51 +113,53 @@ std_make ImageMagick-6.9.9-14.tar.xz
 
 unset MAKE_PARAMS
 
-#==========================
-#OCTAVE Installation
-#==========================
+#====================================
+# Additioanl OCTAVE dependencies
+#====================================
 
 #ARPACK
 cd $BUILD_DIR
 git clone https://github.com/opencollab/arpack-ng.git
 cd arpack-ng/
-sh bootstrap 
+sh bootstrap
 ./configure --prefix=$MY_LOCAL --with-blas=$MY_LOCAL/lib/libopenblas.so
 make -j32
 make install
+cd -
 
-#FFTW, GLPK, FLTK, HDF5, GraphicsMagic
 MAKE_PARAMS=-j32 CONFIG_PARAMS="--enable-float --enable-shared" std_make fftw-3.3.6-pl2.tar.gz
 MAKE_PARAMS=-j32 std_make glpk-4.63.tar.gz
 MAKE_PARAMS=-j32 CONFIG_PARAMS="--enable-shared --enable-localjpeg" std_make fltk1.3_1.3.4.orig.tar.gz
-#MAKE_PARAMS=-j32 std_make hdf5-1.10.1.tar.bz2
 MAKE_PARAMS=-j32 CONFIG_PARAMS="--with-quantum-depth=16 --enable-shared --disable-static --with-magick-plus-plus=yes" std_make GraphicsMagick-1.3.26.tar.xz
 
 #Qhull
-cd ~/tools/build
-tar xf ../downloads/qhull-2015-src-7.2.0.tgz
-cd qhull-2015.2/build/
+SRC_FILE=qhull-2015-src-7.2.0.tgz
+PKG_DIR_NAME=`tar -tf $DOWNLOAD_DIR/$SRC_FILE | head -n 1 | cut -d'/' -f1`
+PKG_BLD_DIR=$BUILD_DIR/$PKG_DIR_NAME
+rm -Rf $PKG_BLD_DIR
+tar xf $DOWNLOAD_DIR/$SRC_FILE -C $BUILD_DIR
+cd $PKG_BLD_DIR/build
 cmake -DCMAKE_INSTALL_PREFIX=$MY_LOCAL ..
 make -j32
 make install
 cd -
 
+
 #QRUPDATE
-cd ~/tools/build
-tar xf ~/tools/downloads/qrupdate-1.1.2.tar.gz
-cd ~/tools/build/qrupdate-1.1.2
+SRC_FILE=qrupdate-1.1.2.tar.gz
+PKG_DIR_NAME=`tar -tf $DOWNLOAD_DIR/$SRC_FILE | head -n 1 | cut -d'/' -f1`
+PKG_BLD_DIR=$BUILD_DIR/$PKG_DIR_NAME
+rm -Rf $PKG_BLD_DIR
+tar xf $DOWNLOAD_DIR/$SRC_FILE -C $BUILD_DIR
+cd $PKG_BLD_DIR
 sed -i -e "s/-lblas/\/home\/a78khan\/tools\/local\/lib\/libopenblas.so/g" Makeconf -e "s/-llapack/\/home\/a78khan\/tools\/local\/lib\/libopenblas.so/g" -e "s/PREFIX=\/usr\/local/PREFIX=\/home\/a78khan\/tools\/local/g"
 make -j32 solib
 make install
 cd -
 
+
 #Sparse Suite
-cd ~/tools/build/
-tar xf ~/tools/downloads/SuiteSparse-4.5.5.tar.gz
-cd SuiteSparse
-make -j32 BLAS=$MY_LOCAL/lib/libopenblas.so LAPACK=/usr/lib/liblapack.so.3 library 
-make INSTALL=$MY_LOCAL BLAS=$MY_LOCAL/lib/libopenblas.so LAPACK=/usr/lib/liblapack.so.3 install
-cd -
+MAKE_PARAMS="-j32" BLAS=$MY_LOCAL/lib/libopenblas.so LAPACK=/usr/lib/liblapack.so.3 CONFIG_PARAMS="library" std_make SuiteSparse-4.5.5.tar.gz
 
 
 #======================
@@ -173,4 +175,4 @@ MAKE_PARAMS=-j32 CONFIG_PARAMS="F77=gfortran --without-opengl --without-qt" std_
 MAKE_PARAMS=-j32 CONFIG_PARAMS="--enable-R-shlib --with-cairo --with-jpeglib --with-jpeglib --with-readline --with-tcltk --with-blas=$MY_LOCAL/lib/libopenblas.so --with-lapack --enable-R-shlib --enable-java" std_make R-3.4.1.tar.gz
 
 R --no-save --no-restore
-wget -P /tmp https://raw.githubusercontent.com/atifijazkhan/uow-tools/master/install-packages.R
+source('~/workspace/software/bin/build-tools/install-packages.R')
