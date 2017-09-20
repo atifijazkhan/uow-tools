@@ -1,4 +1,4 @@
-mkdir('~/tools/downloads/R-packages', recursive = TRUE)
+dir.create('~/tools/downloads/R-packages', recursive = TRUE)
 
 install.packages("svglite", dependencies = TRUE, Ncpus=32, destdir="~/tools/downloads/R-packages/")
 install.packages("gdtools", dependencies = TRUE, Ncpus=32, destdir="~/tools/downloads/R-packages/")
