@@ -107,9 +107,9 @@ std_make libcroco-0.6.12.tar.xz
 std_make pango-1.40.12.tar.xz
 CONFIG_PARAMS="--disable-libmount" std_make glib-2.54.0.tar.xz
 std_make gobject-introspection-1.54.0.tar.xz
-RUSTUP_HOME=$MY_LOCAL/rustup CARGO_HOME=$MY_LOCAL/cargo std_make 
 std_make gdk-pixbuf-2.36.10.tar.xz
-librsvg-2.41.0.tar.xz
+RUSTUP_HOME=$MY_LOCAL/rustup CARGO_HOME=$MY_LOCAL/cargo std_make librsvg-2.41.0.tar.xz
+
 unset MAKE_PARAMS
 
 #==========================
@@ -171,19 +171,5 @@ MAKE_PARAMS=-j32 CONFIG_PARAMS="F77=gfortran --without-opengl --without-qt" std_
 #================
 MAKE_PARAMS=-j32 CONFIG_PARAMS="--enable-R-shlib --with-cairo --with-jpeglib --with-jpeglib --with-readline --with-tcltk --with-blas=$MY_LOCAL/lib/libopenblas.so --with-lapack --enable-R-shlib --enable-java" std_make R-3.4.1.tar.gz
 
-mkdir -p ~/tools/downloads/R-packages/  
-
-#R --no-save --no-restore
-#install.packages("svglite", dependencies = TRUE, destdir="~/tools/downloads/R-packages/")
-#install.packages("gdtools", dependencies = TRUE, destdir="~/tools/downloads/R-packages/")
-#install.packages("RMySQL", dependencies = TRUE, destdir="~/tools/downloads/R-packages/"  , configure.vars = "INCLUDE_DIR=/home/a78khan/tools/local/include LIB_DIR=/home/a78khan/tools/local/lib")
-#install.packages("gpuR", dependencies = TRUE, destdir="~/tools/downloads/R-packages/")
-#install.packages("tm", dependencies = TRUE, destdir="~/tools/downloads/R-packages/")
-#install.packages("wordcloud", dependencies = TRUE, destdir="~/tools/downloads/R-packages/")
-#install.packages("ggplot2", dependencies = TRUE, destdir="~/tools/downloads/R-packages/")
-#install.packages("twitteR", dependencies = TRUE, destdir="~/tools/downloads/R-packages/")
-#install.packages("neuralnet", dependencies = TRUE, destdir="~/tools/downloads/R-packages/")
-#install.packages("topicmodels", dependencies = TRUE, destdir="~/tools/downloads/R-packages/")
-#install.packages("tesseract", dependencies = TRUE, destdir="~/tools/downloads/R-packages/")
-#install.packages("magick", dependencies = TRUE, destdir="~/tools/downloads/R-packages/")
-#install.packages("rgl", dependencies = TRUE, destdir="~/tools/downloads/R-packages/")
+R --no-save --no-restore
+wget -P /tmp https://raw.githubusercontent.com/atifijazkhan/uow-tools/master/install-packages.R
