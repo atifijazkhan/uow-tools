@@ -109,6 +109,7 @@ CONFIG_PARAMS="--disable-libmount" std_make glib-2.54.0.tar.xz
 std_make gobject-introspection-1.54.0.tar.xz
 std_make gdk-pixbuf-2.36.10.tar.xz
 RUSTUP_HOME=$MY_LOCAL/rustup CARGO_HOME=$MY_LOCAL/cargo std_make librsvg-2.41.0.tar.xz
+std_make ImageMagick.tar.gz
 
 unset MAKE_PARAMS
 
