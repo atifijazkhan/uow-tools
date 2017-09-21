@@ -5,14 +5,7 @@
 #==========================
 source ~/workspace/software/bin/build-tools/env.build
 build_init
-
-
-#==========================
-#BASE Installation
-#==========================
-
-
-
+ln -sr ~/workspace/software/cudnn-8.0-linux-x64-v7.tgz $DOWNLOAD_DIR
 
 #==================================
 #cudann
