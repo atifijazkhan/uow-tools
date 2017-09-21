@@ -175,8 +175,33 @@ cd $PKG_BLD_DIR
 ./configure --prefix=$MY_LOCAL
 make -j32
 make install
+make training
+make training-install
+
+#download the training files
+wget -N -P $MY_LOCAL/share/tessdata https://github.com/tesseract-ocr/tessdata/raw/3.04.00/osd.traineddata
+wget -N -P $MY_LOCAL/share/tessdata https://github.com/tesseract-ocr/tessdata/raw/3.04.00/equ.traineddata
+wget -N -P $MY_LOCAL/share/tessdata https://github.com/tesseract-ocr/tessdata/raw/3.04.00/fra.traineddata
+wget -N -P $MY_LOCAL/share/tessdata https://github.com/tesseract-ocr/tessdata/raw/3.04.00/eng.traineddata
+wget -N -P $MY_LOCAL/share/tessdata https://github.com/tesseract-ocr/tessdata/raw/3.04.00/ita.traineddata
+wget -N -P $MY_LOCAL/share/tessdata https://github.com/tesseract-ocr/tessdata/raw/3.04.00/jpn.traineddata
+wget -N -P $MY_LOCAL/share/tessdata https://github.com/tesseract-ocr/tessdata/raw/3.04.00/spa.traineddata
 cd -
 
+
+# R Module
+cd $BUILD_DIR
+git clone https://github.com/ropensci/tesseract.git
+cd tesseract/
+sed -i 's/R_HOME/MY_LOCAL/g' configure
+sed -i 's#`\${MY_LOCAL}/bin/R CMD config CXXCPP`#"g++ -E -std=gnu++11"#g' configure
+cd -
+
+# libwebp
+MAKE_PARAMS="-j32" std_make libwebp-0.6.0.tar.gz
+
+# gdal
+MAKE_PARAMS="-j32" std_make gdal-2.2.1.tar.gz
 
 
 #======================
