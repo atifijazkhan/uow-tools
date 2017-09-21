@@ -1,0 +1,22 @@
+source ~/workspace/software/bin/build-tools/env.build 
+
+# -----------------------------------------------------------
+# Remove the generated content and the downloaded files
+# -----------------------------------------------------------
+rm -Rf $HOME/tools/*
+
+# -----------------------------------------------------------
+# Pull the latest build tools
+# -----------------------------------------------------------
+cd $BUILDTOOLS_HOME
+git fetch --all
+git reset --hard origin/master
+chmod u+x install-local.sh
+cd -
+
+# -----------------------------
+# Download the files
+# -----------------------------
+build_init
+download 
+~/workspace/software/bin/build-tools/install-local.sh | tee /tmp/install.log
