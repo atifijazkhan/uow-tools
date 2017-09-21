@@ -196,6 +196,9 @@ MAKE_PARAMS="-j32" std_make libwebp-0.6.0.tar.gz
 # gdal
 MAKE_PARAMS="-j32" std_make gdal-2.2.1.tar.gz
 
+# proj
+MAKE_PARAMS="-j32" std_make proj-4.9.3.tar.gz
+
 
 #======================
 #Octave
