@@ -14,5 +14,4 @@ install.packages("ggplot2",     dependencies = TRUE, repos=mirror,  Ncpus=32, de
 install.packages("twitteR",     dependencies = TRUE, repos=mirror,  Ncpus=32, destdir=target_dir)
 install.packages("neuralnet",   dependencies = TRUE, repos=mirror,  Ncpus=32, destdir=target_dir)
 install.packages("topicmodels", dependencies = TRUE, repos=mirror,  Ncpus=32, destdir=target_dir)
-install.packages("tesseract",   dependencies = TRUE, repos=mirror,  Ncpus=32, destdir=target_dir)
 install.packages("magick",      dependencies = TRUE, repos=mirror,  Ncpus=32, destdir=target_dir)
