@@ -110,6 +110,8 @@ std_make gobject-introspection-1.54.0.tar.xz
 std_make gdk-pixbuf-2.36.10.tar.xz
 RUSTUP_HOME=$MY_LOCAL/rustup CARGO_HOME=$MY_LOCAL/cargo std_make librsvg-2.41.0.tar.xz
 std_make ImageMagick-6.9.9-14.tar.xz
+std_make leptonica-1.74.4.tar.gz
+std_make autoconf-archive-2017.03.21.tar.xz
 
 unset MAKE_PARAMS
 
@@ -160,6 +162,21 @@ cd -
 
 #Sparse Suite
 MAKE_PARAMS="-j32" BLAS=$MY_LOCAL/lib/libopenblas.so LAPACK=/usr/lib/liblapack.so.3 CONFIG_PARAMS="library" std_make SuiteSparse-4.5.5.tar.gz
+
+#tesseract
+SRC_FILE=3.05.zip
+PKG_DIR_NAME=tesseract-3.05
+PKG_BLD_DIR=$BUILD_DIR/$PKG_DIR_NAME
+rm -Rf $PKG_BLD_DIR
+cd $BUILD_DIR
+unzip $DOWNLOAD_DIR/$SRC_FILE
+cd $PKG_BLD_DIR
+./autogen.sh
+./configure --prefix=$MY_LOCAL
+make -j32
+make install
+cd -
+
 
 
 #======================
