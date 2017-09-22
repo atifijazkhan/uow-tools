@@ -19,4 +19,4 @@ cd -
 # -----------------------------
 build_init
 download 
-~/workspace/software/bin/build-tools/install-local.sh | tee /tmp/install.log
+~/workspace/software/bin/build-tools/install-local.sh 2>&1 | tee /tmp/install.log
