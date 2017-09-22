@@ -188,6 +188,7 @@ git clone https://github.com/ropensci/tesseract.git
 cd tesseract/
 sed -i 's/R_HOME/MY_LOCAL/g' configure
 sed -i 's#`\${MY_LOCAL}/bin/R CMD config CXXCPP`#"g++ -E -std=gnu++11"#g' configure
+sed -i "s#/usr/include#/home/a78khan/tools/local/include#g" configure
 cd -
 
 # libwebp
