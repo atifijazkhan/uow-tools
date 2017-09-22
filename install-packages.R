@@ -3,6 +3,8 @@ dir.create('~/tools/downloads/R-packages', recursive = TRUE)
 mirror <- "http://cran.utstat.utoronto.ca/"
 target_dir <- "~/tools/downloads/R-packages/"
 
+
+install.packages("rappdirs",     dependencies = TRUE, repos=mirror,  Ncpus=32, destdir=target_dir)
 install.packages("config",     dependencies = TRUE, repos=mirror,  Ncpus=32, destdir=target_dir)
 install.packages("svglite",     dependencies = TRUE, repos=mirror,  Ncpus=32, destdir=target_dir)
 install.packages("gdtools",     dependencies = TRUE, repos=mirror,  Ncpus=32, destdir=target_dir)
