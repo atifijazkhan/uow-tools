@@ -1,0 +1,17 @@
+source ~/workspace/software/bin/build-tools/env.build
+
+URL="https://github.com/bazelbuild/bazel/releases/download/0.5.4/bazel-0.5.4-installer-linux-x86_64.sh"
+BAZEL_SH=${URL##*/}
+
+echo Working with $DOWNLOAD_DIR/$BAZEL_SH
+echo Installing in $MY_LOCAL
+rm -Rf $DOWNLOAD_DIR/$BAZEL_SH
+wget -P $DOWNLOAD_DIR $URL
+chmod u+x $DOWNLOAD_DIR/$BAZEL_SH
+
+if [ ! -d "$MY_LOCAL" ]; then
+  mkdir -p $MY_LOCAL
+fi
+
+$DOWNLOAD_DIR/$BAZEL_SH --prefix=$MY_LOCAL
+bazel version
