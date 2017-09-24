@@ -52,7 +52,7 @@ source ~/workspace/software/bin/build-tools/env.build
 export VIRT_ENV_TARGET=/home/a78khan/tools/virtualenv-python-3
 source $VIRT_ENV_TARGET/bin/activate
 
-cd $DOWNLOAD_DIR
+cd $BUILD_DIR
 rm -Rf tensorflow
 git clone https://github.com/tensorflow/tensorflow
 cd tensorflow
@@ -70,6 +70,8 @@ pip install /tmp/tensorflow_pkg/tensorflow-1.3.0-cp36-cp36m-linux_x86_64.whl
 
 unset VIRT_ENV_TARGET
 deactivate
+cd -
+
 
 # --------------------------------
 # validate the installation
