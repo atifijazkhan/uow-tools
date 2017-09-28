@@ -25,7 +25,7 @@ unset URL; unset BAZEL_SH
 # Python Installation
 # ##################################################
 source ~/workspace/software/bin/build-tools/env.build
-URL="https://www.python.org/ftp/python/3.6.1/Python-3.6.1.tar.xz"
+URL="https://www.python.org/ftp/python/3.6.2/Python-3.6.2.tar.xz"
 TARGET_SRC_FILE=${URL##*/}
 wget -P $DOWNLOAD_DIR $URL
 MAKE_PARAMS=-j32 CONFIG_PARAMS="--enable-optimizations" std_make $TARGET_SRC_FILE
@@ -40,6 +40,13 @@ $MY_PYTHON_HOME/virtualenv --system-site-packages -p python$MY_PYTHON_VER $VIRT_
 source $VIRT_ENV_TARGET/bin/activate
 pip install -U pip
 pip install -U numpy
+pip install -U scikit-learn
+pip install -U scipy
+pip install -U pandas
+pip install -U matplotlib
+pip install -U seaborn
+pip install -U nltk
+pip install -U ipython
 deactivate
 
 unset URL; unset TARGET_SRC_FILE; unset MY_PYTHON_HOME; unset MY_PYTHON_VER; unset VIRT_ENV_TARGET
