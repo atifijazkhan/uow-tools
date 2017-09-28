@@ -102,7 +102,7 @@ CONFIG_PARAMS="--disable-libmount" std_make glib-2.54.0.tar.xz
 std_make gobject-introspection-1.54.0.tar.xz
 std_make gdk-pixbuf-2.36.10.tar.xz
 RUSTUP_HOME=$MY_LOCAL/rustup CARGO_HOME=$MY_LOCAL/cargo std_make librsvg-2.41.0.tar.xz
-std_make ImageMagick-6.9.9-14.tar.xz
+std_make ImageMagick-6.9.9-15.tar.xz
 std_make leptonica-1.74.4.tar.gz
 std_make autoconf-archive-2017.03.21.tar.xz
 
