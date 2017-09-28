@@ -211,7 +211,7 @@ MAKE_PARAMS=-j32 CONFIG_PARAMS="F77=gfortran --without-opengl --without-qt" std_
 #================
 # R
 #================
-MAKE_PARAMS=-j32 CONFIG_PARAMS="--enable-R-shlib --with-cairo --with-jpeglib --with-jpeglib --with-readline --with-tcltk --with-blas=$MY_LOCAL/lib/libopenblas.so --with-lapack --enable-R-shlib --enable-java" std_make R-3.4.1.tar.gz
+MAKE_PARAMS=-j32 CONFIG_PARAMS="--enable-R-shlib --with-cairo --with-jpeglib --with-jpeglib --with-readline --with-tcltk --with-blas=$MY_LOCAL/lib/libopenblas.so --with-lapack --enable-R-shlib --enable-java" std_make R-3.4.2.tar.gz
 
 #install the R packages
 #========================
