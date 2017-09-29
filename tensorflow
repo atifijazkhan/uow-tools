@@ -57,11 +57,59 @@ git clone https://github.com/tensorflow/tensorflow
 cd tensorflow
 git checkout -b v1.3.0
 ./configure
+# ---------------------------------
 # #settings used
-#	8.0	
-#	/usr/local/cuda-7.5
-#	/home/a78khan/tools/local/cuda
-#	3.0
+# ---------------------------------
+# Please specify the location of python. [Default is /home/a78khan/tools/virtualenv-python-3/bin/python]: 
+# Please input the desired Python library path to use.  Default is [/home/a78khan/tools/virtualenv-python-3/lib/python3.6/site-packages]
+# 
+# Do you wish to build TensorFlow with jemalloc as malloc support? [Y/n]: 
+# jemalloc as malloc support will be enabled for TensorFlow.
+# 
+# Do you wish to build TensorFlow with Google Cloud Platform support? [y/N]: 
+# No Google Cloud Platform support will be enabled for TensorFlow.
+# 
+# Do you wish to build TensorFlow with Hadoop File System support? [y/N]: 
+# No Hadoop File System support will be enabled for TensorFlow.
+# 
+# Do you wish to build TensorFlow with XLA JIT support? [y/N]: 
+# No XLA JIT support will be enabled for TensorFlow.
+# 
+# Do you wish to build TensorFlow with GDR support? [y/N]: 
+# No GDR support will be enabled for TensorFlow.
+# 
+# Do you wish to build TensorFlow with VERBS support? [y/N]: 
+# No VERBS support will be enabled for TensorFlow.
+# 
+# Do you wish to build TensorFlow with OpenCL support? [y/N]: 
+# No OpenCL support will be enabled for TensorFlow.
+# 
+# Do you wish to build TensorFlow with CUDA support? [y/N]: y
+# CUDA support will be enabled for TensorFlow.
+# 
+# Please specify the CUDA SDK version you want to use, e.g. 7.0. [Leave empty to default to CUDA 8.0]: 
+# 
+# Please specify the location where CUDA 8.0 toolkit is installed. Refer to README.md for more details. [Default is /usr/local/cuda]: 
+# 
+# Please specify the cuDNN version you want to use. [Leave empty to default to cuDNN 6.0]: 7
+# 
+# Please specify the location where cuDNN 7 library is installed. Refer to README.md for more details. [Default is /usr/local/cuda]:/home/a78khan/tools/local/cuda
+# 
+# Please specify a list of comma-separated Cuda compute capabilities you want to build with.
+# You can find the compute capability of your device at: https://developer.nvidia.com/cuda-gpus.
+# Please note that each additional compute capability significantly increases your build time and binary size. [Default is: 3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0]
+# 
+# Do you want to use clang as CUDA compiler? [y/N]: 
+# nvcc will be used as CUDA compiler.
+# 
+# Please specify which gcc should be used by nvcc as the host compiler. [Default is /usr/bin/gcc]: 
+# 
+# Do you wish to build TensorFlow with MPI support? [y/N]: 
+# No MPI support will be enabled for TensorFlow.
+# 
+# 
+# Please specify optimization flags to use during compilation when bazel option "--config=opt" is specified [Default is -march=native]: 
+
 bazel clean
 bazel build --config=opt --copt=-march=native --config=cuda //tensorflow/tools/pip_package:build_pip_package
 bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg
