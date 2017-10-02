@@ -6,6 +6,9 @@ DOWNLOAD_DIR=$WORKSPACE_DIR/downloads
 SOFTWARE_DIR=$WORKSPACE_DIR/software
 CONFIGS_DIR=$SOFTWARE_DIR/configs
 
+ 2007  set hive.merge.mapfiles=false;
+ 2008  set mapred.map.tasks=24
+ 2009  set mapred.reduce.tasks=24
 
 # -------------------------
 #  Hadoop
@@ -37,5 +40,9 @@ schematool -dbType derby -initSchema
 hive -e "drop table twitter;"
 hcat -e "CREATE TABLE IF NOT EXISTS twitter (link STRING, id STRING, create_at DATE, create_at_long BIGINT, inreplyto_screen_name STRING, inreplyto_user_id STRING, source STRING, bad_user_id STRING, user_screen_name STRING, order_of_users INT, user_id STRING) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' STORED AS TEXTFILE tblproperties('skip.header.line.count'='1') ;"
 hive -e "LOAD DATA LOCAL INPATH '/home/a78khan/workspace/datasets/twitter-2010/link_status_search_with_ordering_real.csv' into table twitter;"
+
+set hive.merge.mapfiles=false;
+set mapred.map.tasks=24
+set mapred.reduce.tasks=24
 hive -e "select count(*) from twitter
-hive -e "select user_screen_name, count(user_screen_name) AS cnt from twitter GROUP BY user_screen_name ORDER BY cnt DESC;"
+hive -e "select id, user_screen_name, count(user_screen_name) AS cnt from twitter GROUP BY user_screen_name ORDER BY cnt DESC;"
