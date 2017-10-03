@@ -28,7 +28,7 @@ source ~/workspace/software/bin/build-tools/env.build
 URL="https://www.python.org/ftp/python/3.6.2/Python-3.6.2.tar.xz"
 TARGET_SRC_FILE=${URL##*/}
 wget -P $DOWNLOAD_DIR $URL
-MAKE_PARAMS=-j32 CONFIG_PARAMS="--enable-optimizations" std_make $TARGET_SRC_FILE
+MAKE_PARAMS=-j$(getconf _NPROCESSORS_ONLN) CONFIG_PARAMS="--enable-optimizations --enable-unicode=ucs4 --enable-loadable-sqlite-extensions" std_make $TARGET_SRC_FILE
 
 MY_PYTHON_HOME=/home/a78khan/tools/local/bin
 MY_PYTHON_VER=3
@@ -38,7 +38,7 @@ $MY_PYTHON_HOME/pip3 install virtualenv
 rm -Rf $VIRT_ENV_TARGET
 $MY_PYTHON_HOME/virtualenv --system-site-packages -p python$MY_PYTHON_VER $VIRT_ENV_TARGET
 source $VIRT_ENV_TARGET/bin/activate
-pip install -U numpy scikit-learn  scipy pandas matplotlib seaborn nltk ipython
+pip install -U numpy scikit-learn scipy pandas matplotlib seaborn nltk ipython gensim pyemd 
 deactivate
 
 unset URL; unset TARGET_SRC_FILE; unset MY_PYTHON_HOME; unset MY_PYTHON_VER; unset VIRT_ENV_TARGET
