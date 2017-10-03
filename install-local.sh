@@ -105,6 +105,8 @@ RUSTUP_HOME=$MY_LOCAL/rustup CARGO_HOME=$MY_LOCAL/cargo std_make librsvg-2.41.0.
 std_make ImageMagick-6.9.9-15.tar.xz
 std_make leptonica-1.74.4.tar.gz
 std_make autoconf-archive-2017.03.21.tar.xz
+std_make sqlite-autoconf-3200100.tar.gz
+
 
 unset MAKE_PARAMS
 
