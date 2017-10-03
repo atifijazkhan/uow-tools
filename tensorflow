@@ -55,7 +55,7 @@ cd $BUILD_DIR
 rm -Rf tensorflow
 git clone https://github.com/tensorflow/tensorflow
 cd tensorflow
-git checkout -b v1.3.0
+git checkout -b v1.3.1
 ./configure
 # ---------------------------------
 # #settings used
