@@ -1,0 +1,30 @@
+# enable auto complete
+import readline,rlcompleter
+readline.parse_and_bind("tab: complete")
+
+# ----------------------------------------------
+# Use Word2Vec t compute document similarity.
+# ----------------------------------------------
+import gensim, nlkt
+#nltk.download('stopwords')
+from nltk.corpus import stopwords 
+model = gensim.models.KeyedVectors.load_word2vec_format('/home/a78khan/workspace/datasets/google_news_word2vec/GoogleNews-vectors-negative300.bin.gz', binary=True)
+
+sentence_obama = 'Obama speaks to the media in Illinois'.lower().split()
+sentence_president = 'The president greets the press in Chicago'.lower().split()
+sentence_random = 'The goat is chewing tobaco and the lawn chair is not really working for me.'.lower().split()
+
+stopwords = nltk.corpus.stopwords.words('english')
+sentence_obama = [w for w in sentence_obama if w not in stopwords]
+sentence_president = [w for w in sentence_president if w not in stopwords]
+sentence_random = [w for w in sentence_random if w not in stopwords]
+
+print(model.wmdistance(sentence_obama, sentence_obama))
+print(model.wmdistance(sentence_obama, sentence_president))
+print(model.wmdistance(sentence_obama, sentence_random))
+
+
+model.most_similar(positive=['woman', 'king'], negative=['man'])
+
+
+
