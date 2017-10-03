@@ -38,7 +38,7 @@ $MY_PYTHON_HOME/pip3 install virtualenv
 rm -Rf $VIRT_ENV_TARGET
 $MY_PYTHON_HOME/virtualenv --system-site-packages -p python$MY_PYTHON_VER $VIRT_ENV_TARGET
 source $VIRT_ENV_TARGET/bin/activate
-pip install -U numpy scikit-learn scipy pandas matplotlib seaborn nltk ipython gensim pyemd 
+pip install -U numpy scikit-learn scipy pandas matplotlib seaborn nltk ipython gensim pyemd Cython
 deactivate
 
 unset URL; unset TARGET_SRC_FILE; unset MY_PYTHON_HOME; unset MY_PYTHON_VER; unset VIRT_ENV_TARGET
