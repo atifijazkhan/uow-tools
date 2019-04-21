@@ -5,22 +5,22 @@
 #==========================
 source ~/workspace/software/bin/build-tools/env.build
 build_init
-ln -sr ~/workspace/software/cudnn-8.0-linux-x64-v7.tgz $DOWNLOAD_DIR
+ln -sr ~/workspace/software/cudnn-9.0-linux-x64-v7.5.0.56.tgz $DOWNLOAD_DIR
 
 #==================================
 #cudann
 #==================================
-SRC_FILE=cudnn-8.0-linux-x64-v7.tgz
+SRC_FILE=cudnn-9.0-linux-x64-v7.5.0.56.tgz
 tar xf $DOWNLOAD_DIR/$SRC_FILE -C $MY_LOCAL
 ln -s -r $MY_LOCAL/cuda/lib64/* $MY_LOCAL/lib/
 ln -s -r $MY_LOCAL/cuda/include/* $MY_LOCAL/include/
-ln -s /usr/local/cuda-8.0/targets/x86_64-linux/lib/libOpenCL.so $MY_LOCAL/lib/
+ln -s /usr/local/cuda-9.0/targets/x86_64-linux/lib/libOpenCL.so $MY_LOCAL/lib/
 
 #openjpeg
 #============================================
-SRC_FILE=openjpeg-v2.2.0-linux-x86_64.tar.gz
+SRC_FILE=openjpeg-v2.3.1-linux-x86_64.tar.gz
 tar xf $DOWNLOAD_DIR/$SRC_FILE -C $MY_LOCAL
-PKG_BLD_DIR=$MY_LOCAL/openjpeg-v2.2.0-linux-x86_64
+PKG_BLD_DIR=$MY_LOCAL/openjpeg-v2.3.1-linux-x86_64
 ln -s -r $PKG_BLD_DIR/bin/* $MY_LOCAL/bin/
 ln -s -r $PKG_BLD_DIR/include/* $MY_LOCAL/include/
 ln -s -r $MY_LOCAL/include/openjpeg-2.2/* $MY_LOCAL/include/
@@ -78,41 +78,61 @@ ln -s -r $MY_LOCAL/cargo/bin/* $MY_LOCAL/bin/
 # Common Requiremnts for R and Octave
 #================================================================================================
 export MAKE_PARAMS=-j32 
-std_make readline-7.0.tar.gz
-std_make curl-7.55.1.tar.gz
-std_make xz-5.2.3.tar.bz2
+std_make readline-8.0.tar.gz
+std_make curl-7.64.1.tar.xz
+std_make xz-5.2.4.tar.bz2
 std_make zlib-1.2.11.tar.gz
-std_make jpegsrc.v9b.tar.gz
-std_make texinfo-6.5.tar.xz
-std_make gnuplot-5.2.0.tar.gz
-std_make glpk-4.63.tar.gz
-std_make hdf5-1.10.1.tar.bz2
-std_make pixman-0.34.0.tar.gz
-std_make cairo-1.14.10.tar.xz
-std_make gsl-2.4.tar.gz
-std_make poppler-0.59.0.tar.xz
-MAKE_PARAMS=-j32  CONFIG_PARAMS="--enable-pcre16 --enable-pcre32 --enable-pcregrep-libz --enable-pcregrep-libbz2 --enable-jit --enable-utf --enable-unicode-properties" std_make pcre-8.41.tar.gz
-std_make libxml2-sources-2.9.5.tar.gz
-std_make libxslt-1.1.30.tar.gz
-std_make tiff-4.0.8.tar.gz
-std_make harfbuzz-1.5.1.tar.bz2
-std_make libcroco-0.6.12.tar.xz
-std_make pango-1.40.12.tar.xz
-CONFIG_PARAMS="--disable-libmount" std_make glib-2.54.0.tar.xz
-std_make gobject-introspection-1.54.0.tar.xz
-std_make gdk-pixbuf-2.36.10.tar.xz
-RUSTUP_HOME=$MY_LOCAL/rustup CARGO_HOME=$MY_LOCAL/cargo std_make librsvg-2.41.0.tar.xz
-std_make ImageMagick-6.9.9-15.tar.xz
-std_make leptonica-1.74.4.tar.gz
-std_make autoconf-archive-2017.03.21.tar.xz
-std_make sqlite-autoconf-3200100.tar.gz
+std_make jpegsrc.v9c.tar.gz
+std_make texinfo-6.6.tar.xz
+std_make gnuplot-5.2.6.tar.gz
+std_make glpk-4.65.tar.gz
+std_make hdf5-1.10.5.tar.bz2
+std_make pixman-0.38.4.tar.gz
+std_make cairo-1.16.0.tar.xz
+std_make gsl-2.5.tar.gz
+MAKE_PARAMS=-j32  CONFIG_PARAMS="--enable-pcre16 --enable-pcre32 --enable-pcregrep-libz --enable-pcregrep-libbz2 --enable-jit --enable-utf --enable-unicode-properties" std_make pcre-8.43.tar.gz
+std_make libxml2-sources-2.9.9.tar.gz
+std_make libxslt-1.1.33.tar.gz
+std_make tiff-4.0.10.tar.gz
+std_make harfbuzz-2.4.0.tar.bz2
+std_make libcroco-0.6.13.tar.xz
+#CONFIG_PARAMS="--disable-libmount" std_make glib-2.61.0.tar.xz
+#std_make gobject-introspection-1.60.1.tar.xz
+
+#std_make pango-1.43.0.tar.xz
+
+
+#std_make gdk-pixbuf-2.38.1.tar.xz
+#RUSTUP_HOME=$MY_LOCAL/rustup CARGO_HOME=$MY_LOCAL/cargo std_make librsvg-2.45.5.tar.xz
+#std_make ImageMagick-7.0.8-41.tar.xz
+std_make leptonica-1.78.0.tar.gz
+std_make autoconf-archive-2018.03.13.tar.xz
+std_make sqlite-autoconf-3280000.tar.gz
 
 
 unset MAKE_PARAMS
 
+
+#poppler
+SRC_FILE=poppler-0.75.0.tar.xz
+PKG_DIR_NAME=`tar -tf $DOWNLOAD_DIR/$SRC_FILE | head -n 1 | cut -d'/' -f1`
+PKG_BLD_DIR=$BUILD_DIR/$PKG_DIR_NAME
+rm -Rf $PKG_BLD_DIR
+tar xf $DOWNLOAD_DIR/$SRC_FILE -C $BUILD_DIR
+mkdir $PKG_BLD_DIR/build
+cd $PKG_BLD_DIR/build
+cmake .. -DCMAKE_INSTALL_PREFIX=$MY_LOCAL -DCMAKE_BUILD_TYPE=release
+make -j32
+make install
+cd -
+
 #====================================
 # Additioanl OCTAVE dependencies
 #====================================
+
+
+
+
 
 #ARPACK
 cd $BUILD_DIR
